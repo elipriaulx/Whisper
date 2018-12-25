@@ -1,0 +1,26 @@
+﻿<reactiveUi:ReactiveUserControl x:TypeArguments="viewModels:HistoryListViewModel" x:Class="Whisper.Apps.Desktop.Views.HistoryListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Whisper.Apps.Desktop.Views"
+             xmlns:reactiveUi="http://reactiveui.net"
+             xmlns:viewModels="clr-namespace:Whisper.Apps.Desktop.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <UniformGrid Grid.Row="0" Rows="1" Margin="11,9">
+            <Button x:Name="AddGuidButton" Content="Guid" Margin="1" />
+            <Button x:Name="AddPasswordButton" Content="Password" Margin="1" />
+        </UniformGrid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="5">
+            <ItemsControl x:Name="HistoryList" Margin="5" />
+        </ScrollViewer>
+    </Grid>
+</reactiveUi:ReactiveUserControl>

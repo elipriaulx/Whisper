@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="Whisper.Apps.Desktop.Assets.WhisperLogoBg"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             x:Name="ControlRoot"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Viewbox Stretch="Uniform">
+        <Canvas Width="512" Height="512">
+
+            <Canvas.RenderTransform>
+                <TranslateTransform X="0" Y="0"/>
+            </Canvas.RenderTransform>
+
+            <Canvas>
+                <Canvas.RenderTransform>
+                    <MatrixTransform Matrix="0.996094 0 0 0.996094 1 1"/>
+                </Canvas.RenderTransform>
+                <Path Fill="{Binding ElementName=ControlRoot, Path=Foreground}" StrokeMiterLimit="1.41421" StrokeLineJoin="Round">
+                    <Path.Data>
+                        <PathGeometry Figures="M424.96 0C472.999 0 512 39.002 512 87.04L512 424.96C512 472.999 472.999 512 424.96 512L87.04 512C39.001 512 0 472.999 0 424.96L0 87.04C0 39.002 39.001 0 87.04 0L424.96 0ZM326.507 276.216C357.739 276.216 383.096 301.355 383.096 332.32C383.096 363.285 357.739 388.424 326.507 388.424C295.275 388.424 269.919 363.285 269.919 332.32C269.919 301.355 295.275 276.216 326.507 276.216ZM183.096 276.216C214.328 276.216 239.685 301.355 239.685 332.32C239.685 363.285 214.328 388.424 183.096 388.424C151.864 388.424 126.507 363.285 126.507 332.32C126.507 301.355 151.864 276.216 183.096 276.216ZM111.39 153.424C142.622 153.424 167.979 178.564 167.979 209.528C167.979 240.493 142.622 265.633 111.39 265.633C80.158 265.633 54.802 240.493 54.802 209.528C54.802 178.564 80.158 153.424 111.39 153.424ZM398.213 153.424C429.445 153.424 454.802 178.564 454.802 209.528C454.802 240.493 429.445 265.633 398.213 265.633C366.981 265.633 341.624 240.493 341.624 209.528C341.624 178.564 366.981 153.424 398.213 153.424ZM254.802 153.424C286.034 153.424 311.39 178.564 311.39 209.528C311.39 240.493 286.034 265.633 254.802 265.633C223.569 265.633 198.213 240.493 198.213 209.528C198.213 178.564 223.569 153.424 254.802 153.424Z" FillRule="EvenOdd"/>
+                    </Path.Data>
+                </Path>
+            </Canvas>
+
+        </Canvas>
+    </Viewbox>
+</UserControl>

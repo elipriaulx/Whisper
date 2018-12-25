@@ -1,0 +1,13 @@
+﻿<Application x:Class="Whisper.Apps.Desktop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Lustd;component/Schemes/DarkScheme.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Lustd;component/Themes/DefaultTheme.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Lustd;component/Highlights/CaribbeanGreenHighlight.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
