@@ -41,13 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="GuidGeneratorModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Whisper.Extensibility\Whisper.Extensibility.csproj">
-      <Project>{aba3a8b3-ff9d-490f-add8-4bf717d85b4d}</Project>
-      <Name>Whisper.Extensibility</Name>
+    <ProjectReference Include="..\Whisper.Core\Whisper.Core.csproj">
+      <Project>{2d1b6c36-8b97-4e0b-a356-306e80c81fd1}</Project>
+      <Name>Whisper.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

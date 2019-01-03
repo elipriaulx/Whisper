@@ -1,31 +1,53 @@
-﻿using System.Windows;
+﻿using System;
+using System.Reactive.Linq;
+using System.Windows;
 using System.Windows.Input;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
+using Whisper.Core.Models.Generation;
 
 namespace Whisper.Apps.Desktop.ViewModels
 {
-    public abstract class HistoryListItemViewModel : ReactiveObject
+    public class HistoryListItemViewModel : ReactiveObject, IDisposable
     {
+        private readonly ContentBase _content;
+        private readonly IDisposable _subscriptions;
+
         protected HistoryListItemViewModel()
         {
-            CopyToClipboardCommand = ReactiveCommand.Create(CopyToClipboard);
+        }
+        public HistoryListItemViewModel(ContentBase content, IClipboard clipboard) : this()
+        {
+            _content = content;
+
+            CopyToClipboardCommand = ReactiveCommand.Create(() => { content.SetToClipboard(clipboard); });
+
+            _subscriptions = content.Updated.ObserveOnDispatcher().Do(_ => { Update(); }).Subscribe();
+
+            Update();
         }
 
-        public void CopyToClipboard()
+        private void Update()
         {
-            var clipboardContent = GetClipboardContents();
-
-            Clipboard.SetText(clipboardContent);
+            ContentDescription = _content.Name;
+            ContentPreview = _content.PreviewText;
+            Icon = _content.Mdl2Icon;
         }
 
         public ICommand CopyToClipboardCommand { get; }
 
-        public abstract string ContentDescription { get; }
+        [Reactive]
+        public string ContentDescription { get; private set; }
 
-        public abstract string ContentPreview { get; }
+        [Reactive]
+        public string ContentPreview { get; private set; }
 
-        public abstract string Icon { get; }
+        [Reactive]
+        public string Icon { get; private set; }
 
-        protected abstract string GetClipboardContents();
+        public void Dispose()
+        {
+            _subscriptions?.Dispose();
+        }
     }
 }

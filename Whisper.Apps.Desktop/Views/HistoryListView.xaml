@@ -8,19 +8,9 @@
              xmlns:viewModels="clr-namespace:Whisper.Apps.Desktop.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
 
-        <UniformGrid Grid.Row="0" Rows="1" Margin="11,9">
-            <Button x:Name="AddGuidButton" Content="Guid" Margin="1" />
-            <Button x:Name="AddPasswordButton" Content="Password" Margin="1" />
-        </UniformGrid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="5">
+        <ItemsControl x:Name="HistoryList" Margin="5" />
+    </ScrollViewer>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="5">
-            <ItemsControl x:Name="HistoryList" Margin="5" />
-        </ScrollViewer>
-    </Grid>
 </reactiveUi:ReactiveUserControl>

@@ -1,0 +1,243 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:Whisper.Apps.Desktop.Controls"
+    xmlns:assets="clr-namespace:Whisper.Apps.Desktop.Assets">
+
+    <Style TargetType="{x:Type assets:WindowTitle}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type assets:WindowTitle}">
+                    <StackPanel Orientation="Horizontal" Margin="3">
+                        <assets:WhisperLogoBg Margin="5" Foreground="{DynamicResource HighlightMidColour}" />
+                        <TextBlock Text="Whisper" VerticalAlignment="Center" Margin="5,5,0,5" Foreground="{DynamicResource ForegroundShallowColour}" />
+                        <TextBlock x:Name="TitleSeparator" Text=" - " VerticalAlignment="Center" Margin="0,5" Foreground="{DynamicResource ForegroundDeepColour}"  />
+                        <ContentControl x:Name="TitleArea" Content="{TemplateBinding Content}" VerticalAlignment="Center" Margin="0,5" Foreground="{DynamicResource ForegroundDeepColour}" />
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="TitleSeparator" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="TitleArea" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type controls:LustdWindowTitleBarButton}">
+        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundMidColour}" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundMidColour}" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LustdWindowTitleBarButton}">
+                    <Grid x:Name="border" Background="Transparent" SnapsToDevicePixels="true" MinHeight="{TemplateBinding MinHeight}" MinWidth="{TemplateBinding MinWidth}">
+                        <Border x:Name="Body" Background="{TemplateBinding Background}" Opacity="0" />
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Body" Property="Opacity" Value="1.0" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="Body" Property="Opacity" Value="0.85"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+                <Setter Property="FontSize" Value="10" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="{x:Type controls:LustdWindowTitleBarToggleButton}">
+        <Setter Property="Width" Value="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundMidColour}" />
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundMidColour}" />
+        <Setter Property="Opacity" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LustdWindowTitleBarToggleButton}">
+                    <Grid x:Name="border" Background="Transparent" SnapsToDevicePixels="true">
+                        <Border x:Name="Body" Background="{TemplateBinding Background}" Opacity="0" />
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Background" Value="{DynamicResource BackgroundShallowColour}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundShallowColour}" />
+                            <Setter TargetName="Body" Property="Opacity" Value="1.0" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Body" Property="Opacity" Value="1.0" />
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundShallowColour}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter TargetName="Body" Property="Opacity" Value="0.85"/>
+                            <Setter Property="Foreground" Value="{DynamicResource ForegroundShallowColour}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+                <Setter Property="FontSize" Value="10" />
+            </Style>
+        </Style.Resources>
+    </Style>
+
+    <Style TargetType="{x:Type controls:LustdWindow}">
+        <Setter Property="Foreground" Value="{DynamicResource ForegroundMidColour}" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundDeepColour}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BackgroundShallowColour}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome
+                    ResizeBorderThickness="3"
+                    CaptionHeight="40">
+                </WindowChrome>
+            </Setter.Value>
+        </Setter>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:LustdWindow}">
+                    <Grid x:Name="Frame">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Border x:Name="FrameFill" Grid.RowSpan="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" IsHitTestVisible="False" />
+
+                        <Grid x:Name="TitlePanel" Grid.Row="0" Height="40">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Column="0" x:Name="TitleContentText" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title}" Visibility="Collapsed" VerticalAlignment="Center" Margin="10,5" IsHitTestVisible="False" />
+
+                            <ContentControl Grid.Column="0" x:Name="TitleContentArea"  Content="{TemplateBinding TitleContent}" IsHitTestVisible="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=AllowTitleInteraction}" />
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,1,1,0">
+
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type controls:LustdWindowTitleBarButtonPanel}">
+                                        <Setter Property="Margin" Value="5,0,0,0" />
+                                        <Setter Property="Orientation" Value="Horizontal" />
+                                    </Style>
+                                </StackPanel.Resources>
+
+                                <ContentControl x:Name="ActionContentArea" Content="{TemplateBinding ActionContent}" />
+                                
+                                <controls:LustdWindowTitleBarButtonPanel x:Name="ExtraButtonHost" Visibility="Collapsed">
+                                    <controls:LustdWindowTitleBarButton x:Name="MinimiseToTrayWindowButton" ToolTip="Minimise To Tray" Command="{Binding RelativeSource={RelativeSource TemplatedParent}, Path= MinimiseToTrayCommand}" Visibility="Collapsed">
+                                        <TextBlock Text="&#xE741;" />
+                                    </controls:LustdWindowTitleBarButton>
+                                    <controls:LustdWindowTitleBarToggleButton x:Name="AlwaysOnTopButton" ToolTip="Always On Top" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Topmost, Mode=TwoWay}" Visibility="Collapsed">
+                                        <TextBlock Text="&#xE898;" />
+                                    </controls:LustdWindowTitleBarToggleButton>
+                                </controls:LustdWindowTitleBarButtonPanel>
+
+                                <controls:LustdWindowTitleBarButtonPanel>
+                                    <controls:LustdWindowTitleBarButton x:Name="MinimiseWindowButton" ToolTip="Minimise" Command="{x:Static SystemCommands.MinimizeWindowCommand}">
+                                        <TextBlock Text="&#xE949;" />
+                                    </controls:LustdWindowTitleBarButton>
+                                    <controls:LustdWindowTitleBarButton x:Name="MaximiseWindowButton" ToolTip="Maximise" Command="{x:Static SystemCommands.MaximizeWindowCommand}">
+                                        <TextBlock Text="&#xE739;" />
+                                    </controls:LustdWindowTitleBarButton>
+                                    <controls:LustdWindowTitleBarButton x:Name="RestoreWindowButton" ToolTip="Restore" Command="{x:Static SystemCommands.RestoreWindowCommand}">
+                                        <TextBlock Text="&#xE923;" />
+                                    </controls:LustdWindowTitleBarButton>
+                                    <controls:LustdWindowTitleBarButton x:Name="CloseWindowButton" ToolTip="Quit" Background="Red" Command="{x:Static SystemCommands.CloseWindowCommand}">
+                                        <TextBlock Text="&#xE106;" />
+                                    </controls:LustdWindowTitleBarButton>
+                                </controls:LustdWindowTitleBarButtonPanel>
+
+                            </StackPanel>
+                        </Grid>
+
+                        <Border Grid.Row="1" Margin="1">
+                            <ContentPresenter Content="{TemplateBinding Content}" />
+                        </Border>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="Frame" Property="Margin" Value="7,7,7,50" />
+                            <Setter TargetName="MaximiseWindowButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="RestoreWindowButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="FrameFill" Property="BorderThickness" Value="0" />
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter TargetName="MaximiseWindowButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="RestoreWindowButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter TargetName="MaximiseWindowButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="RestoreWindowButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="MinimiseWindowButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="CanMinimize">
+                            <Setter TargetName="MaximiseWindowButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="RestoreWindowButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="AllowTopmost" Value="True">
+                            <Setter TargetName="AlwaysOnTopButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ExtraButtonHost" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="AllowTray" Value="True">
+                            <Setter TargetName="MinimiseToTrayWindowButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="ExtraButtonHost" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="TitleContent" Value="{x:Null}">
+                            <Setter TargetName="TitleContentText" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="TitleContentArea" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter TargetName="TitlePanel" Property="Opacity" Value="0.7" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="WindowState" Value="Maximized">
+                <Setter Property="WindowChrome.WindowChrome">
+                    <Setter.Value>
+                        <WindowChrome ResizeBorderThickness="0" CaptionHeight="40" />
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="IsActive" Value="False">
+                <Setter Property="BorderBrush" Value="{DynamicResource BackgroundMidColour}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

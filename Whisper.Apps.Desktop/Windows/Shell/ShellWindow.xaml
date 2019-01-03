@@ -1,0 +1,40 @@
+﻿<controls:LustdWindow x:Class="Whisper.Apps.Desktop.Windows.Shell.ShellWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:Whisper.Apps.Desktop.Controls"
+        xmlns:assets="clr-namespace:Whisper.Apps.Desktop.Assets"
+        xmlns:reactiveUi="http://reactiveui.net"
+        mc:Ignorable="d" AllowTopmost="True"
+                      MinWidth="340" MinHeight="360"
+        Title="Whisper" Height="500" Width="360">
+    
+    <controls:LustdWindow.TitleContent>
+        <assets:WindowTitle />
+    </controls:LustdWindow.TitleContent>
+
+    <controls:LustdWindow.ActionContent>
+        <controls:LustdWindowTitleBarButtonPanel>
+            <controls:LustdWindowTitleBarButton x:Name="SettingsButton" ToolTip="Settings">
+                <TextBlock Text="&#xE713;" />
+            </controls:LustdWindowTitleBarButton>
+        </controls:LustdWindowTitleBarButtonPanel>
+    </controls:LustdWindow.ActionContent>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Margin="11,9">
+            <reactiveUi:ViewModelViewHost x:Name="CreatorHost" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+        </Border>
+
+        <Border Grid.Row="1" >
+            <reactiveUi:ViewModelViewHost x:Name="HistoryListHost" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" />
+        </Border>
+    </Grid>
+
+</controls:LustdWindow>

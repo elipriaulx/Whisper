@@ -1,31 +1,39 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using ReactiveUI;
+using Whisper.Core.Services;
 
 namespace Whisper.Apps.Desktop.ViewModels
 {
-    public class HistoryListViewModel : ReactiveObject
+    public class HistoryListViewModel : ReactiveObject, IDisposable
     {
-        public HistoryListViewModel()
+        private readonly IDisposable _subscriptions;
+
+        public HistoryListViewModel(IGeneratorService generator, IClipboardService clipboardService)
         {
-            AddNewGuidCommand = ReactiveCommand.Create(() =>
+            _subscriptions = new CompositeDisposable
             {
-                var g = new HistoryListItemGuidViewModel();
-                HistoryList.Insert(0, g);
-                g.CopyToClipboard();
-            });
+                generator.ContentCleared.ObserveOnDispatcher().Do(x => { HistoryList.Clear(); }).Subscribe(),
+                generator.ContentCreated.ObserveOnDispatcher().Do(x =>
+                {
+                    var vm = new HistoryListItemViewModel(x, clipboardService);
+                    HistoryList.Insert(0, vm);
+                }).Subscribe()
+            };
 
-            AddNewPasswordCommand = ReactiveCommand.Create(() =>
-            {
-                var p = new HistoryListItemPasswordViewModel();
-                HistoryList.Insert(0, p);
-                p.CopyToClipboard();
-            });
+            ClearHistoryCommand = ReactiveCommand.Create(generator.ClearHistory);
         }
-
-        public ICommand AddNewGuidCommand { get; }
-        public ICommand AddNewPasswordCommand { get; }
+        
+        public ICommand ClearHistoryCommand { get; }
 
         public ObservableCollection<HistoryListItemViewModel> HistoryList { get; } = new ObservableCollection<HistoryListItemViewModel>();
+
+        public void Dispose()
+        {
+            _subscriptions?.Dispose();
+        }
     }
 }
