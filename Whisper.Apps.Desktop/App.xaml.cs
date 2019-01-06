@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.IO;
-using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using ReactiveUI;
 using Splat;
@@ -17,18 +13,19 @@ using Whisper.Apps.Desktop.TrayAgent;
 using Whisper.Apps.Desktop.ViewModels;
 using Whisper.Apps.Desktop.Views;
 using Whisper.Apps.Desktop.Windows.Settings;
+using Whisper.Apps.Desktop.Windows.Settings.ViewModels;
+using Whisper.Apps.Desktop.Windows.Settings.Views;
 using Whisper.Apps.Desktop.Windows.Shell;
 
 namespace Whisper.Apps.Desktop
 {
     public partial class App : Application
     {
+        private readonly CompositeDisposable _applicationDisposables = new CompositeDisposable();
         //https://stackoverflow.com/questions/28785375/c-sharp-wpf-catch-keydown-even-when-minimized
         // https://www.dreamincode.net/forums/topic/180436-global-hotkeys/
 
-        WhisperApplication _applicationInstance;
-
-        private readonly CompositeDisposable _applicationDisposables = new CompositeDisposable();
+        private WhisperApplication _applicationInstance;
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -41,6 +38,7 @@ namespace Whisper.Apps.Desktop
             if (!Directory.Exists(WhisperApplication.ConfigDirectory))
                 Directory.CreateDirectory(WhisperApplication.ConfigDirectory);
 
+            var appInfoService = new ApplicationInfoServiceProvider();
             var loggingService = new LoggingServiceProvider(WhisperApplication.LoggingDirectory);
             var clipboardService = new ClipboardServiceProvider();
             var configService = new ConfigurationServiceProvider(loggingService);
@@ -50,19 +48,41 @@ namespace Whisper.Apps.Desktop
             _applicationDisposables.Add(configService.Updated.Throttle(TimeSpan.FromMilliseconds(500)).Do(x => { configService.SaveConfiguration(configPath); }).Subscribe());
 
             var generatorService = new GeneratorServiceProvider();
-            
+
             generatorService.AddFactory(new GuidInstanceFactory());
             generatorService.AddFactory(new PasswordInstanceFactory());
-            
+
             Locator.CurrentMutable.Register(() => new CreateItemView(), typeof(IViewFor<CreateItemViewModel>));
             Locator.CurrentMutable.Register(() => new HistoryListItemView(), typeof(IViewFor<HistoryListItemViewModel>));
             Locator.CurrentMutable.Register(() => new HistoryListView(), typeof(IViewFor<HistoryListViewModel>));
 
-            var settingsManager = new SettingsWindowManager();
+            Locator.CurrentMutable.Register(() => new SettingsPageAboutView(), typeof(IViewFor<SettingsPageAboutViewModel>));
+            Locator.CurrentMutable.Register(() => new SettingsPageApplicationView(), typeof(IViewFor<SettingsPageApplicationViewModel>));
+            Locator.CurrentMutable.Register(() => new SettingsPageGeneralView(), typeof(IViewFor<SettingsPageGeneralViewModel>));
+            Locator.CurrentMutable.Register(() => new SettingsPageGenerationView(), typeof(IViewFor<SettingsPageGenerationViewModel>));
 
-            var shellWindowViewModel = new ShellWindowViewModel(configService, new CreateItemViewModel(generatorService, clipboardService), new HistoryListViewModel(generatorService, clipboardService), settingsManager);
-            
-            var shell = new ShellWindow()
+            Func<SettingsWindow> settingsWindowFactory = () =>
+            {
+                var settingsWindow = new SettingsWindow();
+
+                var settingsVm = new SettingsWindowViewModel(new List<SettingsPageViewModelBase>
+                {
+                    new SettingsPageAboutViewModel(appInfoService),
+                    new SettingsPageGeneralViewModel(configService),
+                    //new SettingsPageApplicationViewModel(),
+                    //new SettingsPageGenerationViewModel()
+                });
+
+                settingsWindow.ViewModel = settingsVm;
+
+                return settingsWindow;
+            };
+
+            var settingsManager = new SettingsWindowManager(settingsWindowFactory);
+
+            var shellWindowViewModel = new ShellWindowViewModel(configService, new CreateItemViewModel(configService, generatorService, clipboardService), new HistoryListViewModel(generatorService, clipboardService), settingsManager);
+
+            var shell = new ShellWindow
             {
                 ViewModel = shellWindowViewModel
             };

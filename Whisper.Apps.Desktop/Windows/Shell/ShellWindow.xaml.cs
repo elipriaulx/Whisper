@@ -5,15 +5,18 @@ namespace Whisper.Apps.Desktop.Windows.Shell
 {
     public partial class ShellWindow : IViewFor<ShellWindowViewModel>
     {
+        private ShellWindowViewModel _viewModel;
+
         public ShellWindow()
         {
             InitializeComponent();
-            
+
             this.WhenActivated(disposables =>
             {
                 this.OneWayBind(ViewModel, x => x.Creator, x => x.CreatorHost.ViewModel).DisposeWith(disposables);
                 this.OneWayBind(ViewModel, x => x.HistoryList, x => x.HistoryListHost.ViewModel).DisposeWith(disposables);
                 this.Bind(ViewModel, x => x.AlwaysOnTop, x => x.Topmost).DisposeWith(disposables);
+                this.OneWayBind(ViewModel, x => x.AllowMinimiseToTray, x => x.AllowTray).DisposeWith(disposables);
                 this.BindCommand(ViewModel, x => x.ShowSettingsCommand, x => x.SettingsButton).DisposeWith(disposables);
             });
         }
@@ -21,13 +24,17 @@ namespace Whisper.Apps.Desktop.Windows.Shell
         object IViewFor.ViewModel
         {
             get => ViewModel;
+            set => ViewModel = (ShellWindowViewModel)value;
+        }
+
+        public ShellWindowViewModel ViewModel
+        {
+            get => _viewModel;
             set
             {
-                ViewModel = (ShellWindowViewModel) value;
+                _viewModel = value;
                 DataContext = value;
             }
         }
-
-        public ShellWindowViewModel ViewModel { get; set; }
     }
 }

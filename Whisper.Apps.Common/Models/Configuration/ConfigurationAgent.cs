@@ -16,7 +16,7 @@ namespace Whisper.Apps.Common.Models.Configuration
             ChangeSource = changeSource;
         }
 
-        public IObservable<ConfigurationChangeInfo> Updated => Agent.Updated.Where(x => ChangeSource == null || ChangeSource == x.ChangeSource);
+        public IObservable<ConfigurationChangeInfo> Updated => Agent.Updated.Where(x => ChangeSource == null || ChangeSource != x.ChangeSource);
 
         public Guid Id => Agent.Id;
 

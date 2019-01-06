@@ -48,9 +48,13 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Models\Configurations\CommonConfigurations.cs" />
+    <Compile Include="Models\Configurations\FactoryMonitorConfiguration.cs" />
+    <Compile Include="Models\Configurations\LoggingConfiguration.cs" />
     <Compile Include="Models\Configuration\CommonConfigurationAgent.cs" />
     <Compile Include="Models\Initialisation\InitialisationStages.cs" />
     <Compile Include="Models\Initialisation\InitialisationUpdate.cs" />
+    <Compile Include="Services\ApplicationInfoServiceProvider.cs" />
     <Compile Include="WhisperApplication.cs" />
     <Compile Include="Models\Configuration\ConfigurationAgent.cs" />
     <Compile Include="Models\Configuration\ConfigurationConstants.cs" />

@@ -3,9 +3,9 @@ using System.Reactive.Linq;
 using System.Windows.Input;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using Whisper.Apps.Desktop.Models.Configurations;
 using Whisper.Apps.Desktop.ViewModels;
 using Whisper.Apps.Desktop.Windows.Settings;
-using Whisper.Apps.Desktop.Windows.Shell.Models;
 using Whisper.Core.Models.Configuration;
 using Whisper.Core.Services;
 
@@ -22,7 +22,7 @@ namespace Whisper.Apps.Desktop.Windows.Shell
         public ShellWindowViewModel(IConfigurationService configurationService, CreateItemViewModel creator, HistoryListViewModel historyList, SettingsWindowManager settingsManager)
         {
             _settingsManager = settingsManager;
-            configurationAgent = configurationService.GetConfigurationAgent<ShellConfiguration>(Guid.Parse("64A5577D-5985-4C91-AE81-7D1E6AD8C969"), this);
+            configurationAgent = configurationService.GetConfigurationAgent<ShellConfiguration>(ApplicationConfigurations.ShellConfiguration, this);
 
             subscriptions = configurationAgent.Updated.ObserveOnDispatcher().Do(x => { RefreshConfig(); }).Subscribe();
 
@@ -44,6 +44,9 @@ namespace Whisper.Apps.Desktop.Windows.Shell
 
         [Reactive]
         public bool AlwaysOnTop { get; set; }
+
+        [Reactive]
+        public bool AllowMinimiseToTray { get; private set; }
         
         public void Dispose()
         {
@@ -61,7 +64,8 @@ namespace Whisper.Apps.Desktop.Windows.Shell
 
                 var configuration = configurationAgent.Get();
 
-                AlwaysOnTop = configuration.AlwaysOnTop;
+                AlwaysOnTop = configuration.EnableAlwaysOnTop;
+                AllowMinimiseToTray = configuration.EnableMinimiseToTray;
             }
             finally
             {
@@ -76,7 +80,8 @@ namespace Whisper.Apps.Desktop.Windows.Shell
 
             var configuration = configurationAgent.Get();
 
-            configuration.AlwaysOnTop = AlwaysOnTop;
+            configuration.EnableAlwaysOnTop = AlwaysOnTop;
+            configuration.EnableMinimiseToTray = AllowMinimiseToTray;
 
             configurationAgent.Update(configuration);
         }

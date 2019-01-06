@@ -1,26 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Whisper.Apps.Desktop.Windows.Settings
 {
     public class SettingsWindowManager
     {
+        private readonly Func<SettingsWindow> _settingsWindowFactory;
+
+        public SettingsWindowManager(Func<SettingsWindow> settingsWindowFactory)
+        {
+            _settingsWindowFactory = settingsWindowFactory;
+        }
+
         public void ShowSettingsWindow()
         {
             var owner = Application.Current.MainWindow;
 
-            var settingsWindow = new SettingsWindow
-            {
-                Owner = owner,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
-            };
+            var window = _settingsWindowFactory();
 
+            window.Owner = owner;
+            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
-            settingsWindow.ShowDialog();
+            window.ShowDialog();
         }
     }
 }

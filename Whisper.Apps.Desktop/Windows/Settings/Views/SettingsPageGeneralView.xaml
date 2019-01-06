@@ -1,0 +1,28 @@
+﻿<reactiveUi:ReactiveUserControl x:TypeArguments="viewModels:SettingsPageGeneralViewModel"
+                                x:Class="Whisper.Apps.Desktop.Windows.Settings.Views.SettingsPageGeneralView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Whisper.Apps.Desktop.Windows.Settings.Views"
+             xmlns:reactiveUi="http://reactiveui.net"
+             xmlns:viewModels="clr-namespace:Whisper.Apps.Desktop.Windows.Settings.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <ScrollViewer>
+        <StackPanel>
+            <StackPanel>
+                <TextBlock Text="Minimise to Tray" />
+                <CheckBox x:Name="MinimiseToTrayCheckBox" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Always on Top" />
+                <CheckBox x:Name="AlwaysOnTopCheckBox" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Auto-copy to Clipboard" />
+                <CheckBox x:Name="AutoCopyCheckBox" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</reactiveUi:ReactiveUserControl>

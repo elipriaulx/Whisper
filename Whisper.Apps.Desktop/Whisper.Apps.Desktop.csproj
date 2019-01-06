@@ -80,6 +80,7 @@
     <Compile Include="Controls\LustdWindowTitleBarButton.cs" />
     <Compile Include="Controls\LustdWindowTitleBarButtonPanel.cs" />
     <Compile Include="Controls\LustdWindowTitleBarToggleButton.cs" />
+    <Compile Include="Models\Configurations\ApplicationConfigurations.cs" />
     <Compile Include="Obsolete\GuidInstanceFactory.cs" />
     <Compile Include="Obsolete\PasswordInstanceFactory.cs" />
     <Compile Include="TrayAgent\WhisperTrayAgent.cs" />
@@ -87,9 +88,27 @@
     <Compile Include="ViewModels\CreateItemViewModel.cs" />
     <Compile Include="ViewModels\HistoryListItemViewModel.cs" />
     <Compile Include="ViewModels\HistoryListViewModel.cs" />
+    <Compile Include="Windows\Settings\ComponentViewModels\ProductViewModel.cs" />
     <Compile Include="Windows\Settings\SettingsWindowManager.cs" />
     <Compile Include="Windows\Settings\SettingsWindowViewModel.cs" />
-    <Compile Include="Windows\Shell\Models\ShellConfiguration.cs" />
+    <Compile Include="Windows\Settings\ViewModels\SettingsPageAboutViewModel.cs" />
+    <Compile Include="Windows\Settings\ViewModels\SettingsPageApplicationViewModel.cs" />
+    <Compile Include="Windows\Settings\ViewModels\SettingsPageGeneralViewModel.cs" />
+    <Compile Include="Windows\Settings\ViewModels\SettingsPageGenerationViewModel.cs" />
+    <Compile Include="Windows\Settings\ViewModels\SettingsPageViewModelBase.cs" />
+    <Compile Include="Windows\Settings\Views\SettingsPageAboutView.xaml.cs">
+      <DependentUpon>SettingsPageAboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Settings\Views\SettingsPageApplicationView.xaml.cs">
+      <DependentUpon>SettingsPageApplicationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Settings\Views\SettingsPageGeneralView.xaml.cs">
+      <DependentUpon>SettingsPageGeneralView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Settings\Views\SettingsPageGenerationView.xaml.cs">
+      <DependentUpon>SettingsPageGenerationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Configurations\ShellConfiguration.cs" />
     <Compile Include="Windows\Shell\ShellWindowViewModel.cs" />
     <Compile Include="Windows\Splash\SplashWindowViewModel.cs" />
     <Compile Include="Views\CreateItemView.xaml.cs">
@@ -139,6 +158,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Settings\SettingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Settings\Views\SettingsPageAboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Settings\Views\SettingsPageApplicationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Settings\Views\SettingsPageGeneralView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Settings\Views\SettingsPageGenerationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,41 +234,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DynamicData">
-      <Version>6.7.1.2534</Version>
-    </PackageReference>
     <PackageReference Include="Fody">
       <Version>3.3.5</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="FontAwesome.WPF">
-      <Version>4.7.0.9</Version>
-    </PackageReference>
     <PackageReference Include="Lustd">
       <Version>1.1.2</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI">
-      <Version>9.6.3</Version>
+      <Version>9.7.2</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI.Fody">
-      <Version>9.6.3</Version>
+      <Version>9.7.2</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI.WPF">
-      <Version>9.6.3</Version>
+      <Version>9.7.2</Version>
     </PackageReference>
     <PackageReference Include="System.Drawing.Common">
       <Version>4.5.1</Version>
-    </PackageReference>
-    <PackageReference Include="System.Reactive">
-      <Version>4.1.2</Version>
-    </PackageReference>
-    <PackageReference Include="System.Reactive.Compatibility">
-      <Version>4.1.2</Version>
     </PackageReference>
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
       <Version>4.5.2</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
