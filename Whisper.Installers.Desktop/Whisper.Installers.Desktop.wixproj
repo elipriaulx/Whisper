@@ -2,29 +2,60 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" InitialTargets="EnsureWixToolsetInstalled" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>3.9</ProductVersion>
-    <ProjectGuid>cb2b7511-aafd-492c-937c-edacfacab98c</ProjectGuid>
+    <Platform Condition=" '$(Platform)' == '' ">x64</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>67ec75d0-662c-4f71-a98d-530884745fe7</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>Whisper.Installers.Desktop</OutputName>
+    <OutputName>Whisper</OutputName>
     <OutputType>Package</OutputType>
-    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\WiX Toolset\v4\wix.targets</WixTargetsPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug</DefineConstants>
+    <DefineConstants>Debug;HarvestPath=..\Whisper.Apps.Desktop\bin\Debug</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DefineConstants Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">HarvestPath=..\Whisper.Apps.Desktop\bin\x64\Debug</DefineConstants>
+    <DefineConstants Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">HarvestPath=..\Whisper.Apps.Desktop\bin\x64\Release</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="WhisperDesktopHeat.wxs" />
     <Compile Include="Product.wxs" />
   </ItemGroup>
-  <Import Project="$(WixTargetsPath)" Condition=" Exists('$(WixTargetsPath)') " />
-  <Target Name="EnsureWixToolsetInstalled" Condition=" !Exists('$(WixTargetsPath)') ">
-    <Error Text="The WiX Toolset v4 build tools must be installed to build this project. To download the WiX Toolset v4, see http://wixtoolset.org/releases/" />
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="ExcludeExeTransform.xsl" />
+    <Content Include="ExcludePdbTransform.xsl" />
+    <Content Include="ExcludeXmlTransform.xsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Whisper.Apps.Desktop\Whisper.Apps.Desktop.csproj">
+      <Name>Whisper.Apps.Desktop</Name>
+      <Project>{dc4b80f2-3c02-415c-9b89-f67355624c88}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixBalExtension">
+      <HintPath>$(WixExtDir)\WixBalExtension.dll</HintPath>
+      <Name>WixBalExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />
+  <Target Name="EnsureWixToolsetInstalled" Condition=" '$(WixTargetsImported)' != 'true' ">
+    <Error Text="The WiX Toolset v3.11 (or newer) build tools must be installed to build this project. To download the WiX Toolset, see http://wixtoolset.org/releases/" />
   </Target>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
@@ -34,4 +65,7 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
+  <Target Name="BeforeBuild">
+    <HeatDirectory Directory="..\Whisper.Apps.Desktop\bin\x64\$(Configuration)" PreprocessorVariable="var.HarvestPath" OutputFile="WhisperDesktopHeat.wxs" ComponentGroupName="WhisperDesktop" DirectoryRefId="INSTALLFOLDER" AutogenerateGuids="true" ToolPath="$(WixToolPath)" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" Transforms="ExcludeExeTransform.xsl;ExcludePdbTransform.xsl;ExcludeXmlTransform.xsl" />
+  </Target>
 </Project>
