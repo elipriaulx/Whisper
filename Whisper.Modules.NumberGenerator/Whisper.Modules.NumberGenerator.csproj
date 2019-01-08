@@ -45,7 +45,10 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="NumberContent.cs" />
+    <Compile Include="NumberGenerator.cs" />
+    <Compile Include="NumberGeneratorConfiguration.cs" />
+    <Compile Include="NumberGeneratorModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

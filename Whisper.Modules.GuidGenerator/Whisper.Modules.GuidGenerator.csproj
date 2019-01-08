@@ -45,6 +45,9 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="GuidContent.cs" />
+    <Compile Include="GuidGenerator.cs" />
+    <Compile Include="GuidGeneratorConfiguration.cs" />
     <Compile Include="GuidGeneratorModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

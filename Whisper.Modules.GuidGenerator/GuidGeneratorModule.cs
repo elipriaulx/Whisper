@@ -1,16 +1,16 @@
 ﻿using System;
-using Whisper.Extensibility.Modularity;
+using Whisper.Core.Modularity;
 
 namespace Whisper.Modules.GuidGenerator
 {
-    public class GuidGeneratorModule : IWhisperModule
+    public sealed class GuidGeneratorModule : IWhisperModule
     {
-        public Guid Id => Guid.Parse("74080dc9-ef0f-4792-8323-524a89c56fc5");
+        public Guid Id => Guid.Parse("4E537619-9A16-43CF-91D6-2365CC38B8B1");
         public string Name => nameof(GuidGeneratorModule);
 
-        public void LoadModule(IGeneratorRegistry registry)
+        public void LoadModule(IComponentRegistry registry)
         {
-
+            registry.RegisterContentGenerator(new GuidGenerator());
         }
     }
 }

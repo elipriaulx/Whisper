@@ -82,8 +82,6 @@
     <Compile Include="Controls\LustdWindowTitleBarButtonPanel.cs" />
     <Compile Include="Controls\LustdWindowTitleBarToggleButton.cs" />
     <Compile Include="Models\Configurations\ApplicationConfigurations.cs" />
-    <Compile Include="Obsolete\GuidInstanceFactory.cs" />
-    <Compile Include="Obsolete\PasswordInstanceFactory.cs" />
     <Compile Include="TrayAgent\WhisperTrayAgent.cs" />
     <Compile Include="ViewModels\CreateItemFactoryConfigurationViewModel.cs" />
     <Compile Include="ViewModels\CreateItemViewModel.cs" />
@@ -232,6 +230,18 @@
     <ProjectReference Include="..\Whisper.Core\Whisper.Core.csproj">
       <Project>{2D1B6C36-8B97-4E0B-A356-306E80C81FD1}</Project>
       <Name>Whisper.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whisper.Modules.GuidGenerator\Whisper.Modules.GuidGenerator.csproj">
+      <Project>{FD2E5BD3-F9E1-4668-9878-5661E41B5C3F}</Project>
+      <Name>Whisper.Modules.GuidGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whisper.Modules.NumberGenerator\Whisper.Modules.NumberGenerator.csproj">
+      <Project>{7D4F2F4C-72A4-45AB-98F1-822D848209AA}</Project>
+      <Name>Whisper.Modules.NumberGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whisper.Modules.PasswordGenerator\Whisper.Modules.PasswordGenerator.csproj">
+      <Project>{7B5A774D-6619-4045-B28E-9FCD011351B7}</Project>
+      <Name>Whisper.Modules.PasswordGenerator</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

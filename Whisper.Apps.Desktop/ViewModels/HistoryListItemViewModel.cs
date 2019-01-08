@@ -11,7 +11,6 @@ namespace Whisper.Apps.Desktop.ViewModels
     public class HistoryListItemViewModel : ReactiveObject, IDisposable
     {
         private readonly ContentBase _content;
-        private readonly IDisposable _subscriptions;
 
         protected HistoryListItemViewModel()
         {
@@ -21,16 +20,14 @@ namespace Whisper.Apps.Desktop.ViewModels
             _content = content;
 
             CopyToClipboardCommand = ReactiveCommand.Create(() => { content.SetToClipboard(clipboard); });
-
-            _subscriptions = content.Updated.ObserveOnDispatcher().Do(_ => { Update(); }).Subscribe();
-
+            
             Update();
         }
 
         private void Update()
         {
             ContentDescription = _content.Name;
-            ContentPreview = _content.PreviewText;
+            ContentPreview = _content.PublicPreviewText;
             Icon = _content.Mdl2Icon;
         }
 
@@ -47,7 +44,7 @@ namespace Whisper.Apps.Desktop.ViewModels
 
         public void Dispose()
         {
-            _subscriptions?.Dispose();
+
         }
     }
 }

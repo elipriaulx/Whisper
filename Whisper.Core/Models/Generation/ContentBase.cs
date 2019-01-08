@@ -1,44 +1,32 @@
 ﻿using System;
-using System.Reactive;
-using System.Reactive.Subjects;
 
 namespace Whisper.Core.Models.Generation
 {
     public abstract class ContentBase
     {
-        private readonly Subject<Unit> _updated = new Subject<Unit>();
+        protected ContentBase()
+        {
+            ContentId = Guid.NewGuid();
+        }
 
-        protected ContentBase(Guid factoryId, string contentName)
+        internal void SetMeta(Guid factoryId, string contentName)
         {
             FactoryId = factoryId;
-            ContentId = Guid.NewGuid();
             Name = contentName;
         }
-
-        public IObservable<Unit> Updated => _updated;
-
-        public Guid FactoryId { get; }
-
+        
         public Guid ContentId { get; }
 
-        public string Name { get; }
+        public Guid FactoryId { get; private set; }
 
-        public string PreviewText { get; private set; }
+        public string Name { get; private set; }
 
-        public string Mdl2Icon { get; private set; }
+        public abstract string PublicPreviewText { get; }
 
-        protected void SetMdl2Icon(string icon)
-        {
-            Mdl2Icon = icon;
-            _updated.OnNext(new Unit());
-        }
+        public abstract string PrivatePreviewText { get; }
 
-        protected void SetPreviewText(string preview)
-        {
-            PreviewText = preview;
-            _updated.OnNext(new Unit());
-        }
-
+        public abstract string Mdl2Icon { get; }
+        
         public abstract void SetToClipboard(IClipboard clipboard);
     }
 }

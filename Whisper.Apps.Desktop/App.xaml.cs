@@ -8,7 +8,6 @@ using ReactiveUI;
 using Splat;
 using Whisper.Apps.Common;
 using Whisper.Apps.Common.Services;
-using Whisper.Apps.Desktop.Obsolete;
 using Whisper.Apps.Desktop.TrayAgent;
 using Whisper.Apps.Desktop.ViewModels;
 using Whisper.Apps.Desktop.Views;
@@ -16,6 +15,9 @@ using Whisper.Apps.Desktop.Windows.Settings;
 using Whisper.Apps.Desktop.Windows.Settings.ViewModels;
 using Whisper.Apps.Desktop.Windows.Settings.Views;
 using Whisper.Apps.Desktop.Windows.Shell;
+using Whisper.Modules.GuidGenerator;
+using Whisper.Modules.NumberGenerator;
+using Whisper.Modules.PasswordGenerator;
 
 namespace Whisper.Apps.Desktop
 {
@@ -49,8 +51,9 @@ namespace Whisper.Apps.Desktop
 
             var generatorService = new GeneratorServiceProvider();
 
-            generatorService.AddFactory(new GuidInstanceFactory());
-            generatorService.AddFactory(new PasswordInstanceFactory());
+            generatorService.AddFactory(new GuidGenerator());
+            generatorService.AddFactory(new PasswordGenerator());
+            generatorService.AddFactory(new NumberGenerator());
 
             Locator.CurrentMutable.Register(() => new CreateItemView(), typeof(IViewFor<CreateItemViewModel>));
             Locator.CurrentMutable.Register(() => new HistoryListItemView(), typeof(IViewFor<HistoryListItemViewModel>));

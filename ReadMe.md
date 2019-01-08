@@ -1,7 +1,7 @@
 Whisper
 =======
 
-[![Build status](https://ci.appveyor.com/api/projects/status/beht45xl4h9lqc2g/branch/master?svg=true)](https://ci.appveyor.com/project/gpriaulx/whisper/branch/master)
+[![Release](https://img.shields.io/github/release-pre/gpriaulx/Whisper.svg)](/releases/latest) [![Build status](https://ci.appveyor.com/api/projects/status/beht45xl4h9lqc2g/branch/master?svg=true)](https://ci.appveyor.com/project/gpriaulx/whisper/branch/master)
 
 ![Whisper Logo](Assets/WhisperBackground-Branding.png)
 

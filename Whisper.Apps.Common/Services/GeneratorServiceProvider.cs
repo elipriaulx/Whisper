@@ -43,7 +43,7 @@ namespace Whisper.Apps.Common.Services
             if (!_contentFactories.TryGetValue(factoryId, out var factory))
                 throw new Exception();
 
-            var instance = factory.CreateDefaultContentInstance();
+            var instance = factory.CreateInstance();
 
             _content.Add(instance);
 

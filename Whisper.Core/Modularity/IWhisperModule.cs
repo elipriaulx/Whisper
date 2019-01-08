@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Whisper.Extensibility.Modularity
+namespace Whisper.Core.Modularity
 {
     public interface IWhisperModule
     {
@@ -8,6 +8,6 @@ namespace Whisper.Extensibility.Modularity
 
         string Name { get; }
 
-        void LoadModule(IGeneratorRegistry registry);
+        void LoadModule(IComponentRegistry registry);
     }
 }

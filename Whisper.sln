@@ -30,6 +30,14 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Whisper.Installers.Desktop"
 		{DC4B80F2-3C02-415C-9B89-F67355624C88} = {DC4B80F2-3C02-415C-9B89-F67355624C88}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{08E8DC6B-0CEC-49D2-8205-886D3D188692}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		ReadMe.md = ReadMe.md
+		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
