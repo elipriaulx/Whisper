@@ -1,15 +1,70 @@
 ﻿<reactiveUi:ReactiveUserControl x:TypeArguments="viewModels:SettingsPageGenerationViewModel"
                                 x:Class="Whisper.Apps.Desktop.Windows.Settings.Views.SettingsPageGenerationView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Whisper.Apps.Desktop.Windows.Settings.Views"
-             xmlns:reactiveUi="http://reactiveui.net"
-             xmlns:viewModels="clr-namespace:Whisper.Apps.Desktop.Windows.Settings.ViewModels"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+                                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                                xmlns:local="clr-namespace:Whisper.Apps.Desktop.Windows.Settings.Views"
+                                xmlns:reactiveUi="http://reactiveui.net"
+                                xmlns:viewModels="clr-namespace:Whisper.Apps.Desktop.Windows.Settings.ViewModels"
+                                mc:Ignorable="d"
+                                d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock>Quack</TextBlock>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <Button x:Name="GeneratorSelectorCreateButton" DockPanel.Dock="Right" Content="Add" />
+            <ComboBox x:Name="GeneratorSelectorComboBox">
+                <ComboBox.Resources>
+                    <DataTemplate DataType="{x:Type viewModels:SettingsPageGenerationAvailableGeneratorViewModel}">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" Margin="2" Foreground="{DynamicResource HighlightMidColour}" FontWeight="Bold" />
+                            <TextBlock Text="{Binding Description}" TextTrimming="CharacterEllipsis" Margin="2" FontStyle="Italic" Foreground="{DynamicResource ForegroundShallowColour}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.Resources>
+            </ComboBox>
+        </DockPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+
+            <DockPanel Grid.Column="0">
+                <DockPanel DockPanel.Dock="Bottom">
+                    <Button x:Name="MoveDownSelectedConfigurationButton" DockPanel.Dock="Left" Content="-" />
+                    <Button x:Name="MoveUpSelectedConfigurationButton" DockPanel.Dock="Right" Content="+" />
+                    <Button x:Name="RemoveSelectedConfigurationButton"  Content="Remove" />
+                </DockPanel>
+                <ListBox x:Name="ConfigurationSelectorListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                    <ListBox.Resources>
+                        <DataTemplate DataType="{x:Type viewModels:SettingsPageGenerationItemViewModel}">
+                            <StackPanel>
+                                <TextBlock TextTrimming="CharacterEllipsis" Margin="2" Foreground="{DynamicResource HighlightMidColour}" FontWeight="Bold">
+                                    <Run Text="{Binding GeneratorName, Mode=OneWay}" />
+                                    <Run Text=": " />
+                                    <Run Text="{Binding Name, Mode=OneWay}" Foreground="{DynamicResource ForegroundMidColour}" />
+                                </TextBlock>
+                                <TextBlock Text="{Binding Description}" TextTrimming="CharacterEllipsis" Margin="2" FontStyle="Italic" Foreground="{DynamicResource ForegroundShallowColour}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.Resources>
+                </ListBox>
+            </DockPanel>
+
+            <Border Grid.Column="2">
+                <reactiveUi:ViewModelViewHost x:Name="SelectedConfigurationHost" />
+            </Border>
+
+        </Grid>
+
     </Grid>
 </reactiveUi:ReactiveUserControl>

@@ -4,7 +4,7 @@ namespace Whisper.Modules.GuidGenerator
 {
     public sealed class GuidGeneratorConfiguration : GeneratorConfigurationBase
     {
-        public GuidGeneratorConfiguration() : base("Guid")
+        public GuidGeneratorConfiguration()
         {
         }
     }

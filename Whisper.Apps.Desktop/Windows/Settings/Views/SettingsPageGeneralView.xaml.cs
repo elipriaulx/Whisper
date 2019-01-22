@@ -11,9 +11,8 @@ namespace Whisper.Apps.Desktop.Windows.Settings.Views
 
             this.WhenActivated(d =>
             {
-                this.Bind(ViewModel, x => x.EnableAlwaysOnTop, x => x.AlwaysOnTopCheckBox.IsChecked).DisposeWith(d);
-                this.Bind(ViewModel, x => x.EnableMinimiseToTray, x => x.MinimiseToTrayCheckBox.IsChecked).DisposeWith(d);
-                this.Bind(ViewModel, x => x.EnableAutoCopyToClipboard, x => x.AutoCopyCheckBox.IsChecked).DisposeWith(d);
+                this.OneWayBind(ViewModel, x => x.ShellConfig, x => x.ShellConfigurationHost.Content).DisposeWith(d);
+                this.OneWayBind(ViewModel, x => x.FactoryMonitorConfig, x => x.FactoryMonitorConfigurationHost.Content).DisposeWith(d);
             });
         }
     }

@@ -21,22 +21,22 @@ namespace Whisper.Apps.Desktop.Windows.Settings.ViewModels
         public override string Description => "General Settings.";
 
         [Reactive]
-        public bool EnableAlwaysOnTop { get; set; }
+        public ShellConfiguration ShellConfig { get; set; }
 
         [Reactive]
-        public bool EnableMinimiseToTray { get; set; }
-
-        [Reactive]
-        public bool EnableAutoCopyToClipboard { get; set; }
+        public FactoryMonitorConfiguration FactoryMonitorConfig { get; set; }
         
         public override void ApplyConfigChanges()
         {
             var shellConfig = _shellConfigurationAgent.Get();
             var factoryMonitorConfig = _factoryMonitorConfigurationAgent.Get();
 
-            shellConfig.EnableMinimiseToTray = EnableMinimiseToTray;
-            shellConfig.EnableAlwaysOnTop = EnableAlwaysOnTop;
-            factoryMonitorConfig.EnableAutoCopy = EnableAutoCopyToClipboard;
+            // Shell Config
+            shellConfig.EnableAlwaysOnTop = ShellConfig.EnableAlwaysOnTop;
+            shellConfig.EnableMinimiseToTray = ShellConfig.EnableMinimiseToTray;
+
+            // Factory Monitor Config
+            factoryMonitorConfig.EnableAutoCopy = FactoryMonitorConfig.EnableAutoCopy;
 
             _shellConfigurationAgent.Update(shellConfig);
             _factoryMonitorConfigurationAgent.Update(factoryMonitorConfig);
@@ -47,9 +47,8 @@ namespace Whisper.Apps.Desktop.Windows.Settings.ViewModels
             var shellConfig = _shellConfigurationAgent.Get();
             var factoryMonitorConfig = _factoryMonitorConfigurationAgent.Get();
 
-            EnableMinimiseToTray = shellConfig.EnableMinimiseToTray;
-            EnableAlwaysOnTop = shellConfig.EnableAlwaysOnTop;
-            EnableAutoCopyToClipboard = factoryMonitorConfig.EnableAutoCopy;
+            ShellConfig = shellConfig;
+            FactoryMonitorConfig = factoryMonitorConfig;
         }
     }
 }

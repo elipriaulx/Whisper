@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product
-	  Id="494C75D5-BF46-408D-B493-6CC9A4570C00"
+	  Id="*"
     Language="1033"
     Name="Whisper"
     Version="!(bind.FileVersion.Whisper.exe)"

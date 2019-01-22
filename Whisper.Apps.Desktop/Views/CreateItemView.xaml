@@ -15,7 +15,16 @@
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
-        <ComboBox x:Name="FactorySelector" Grid.Column="0" />
+        <ComboBox x:Name="FactorySelector" Grid.Column="0">
+            <ComboBox.Resources>
+                <DataTemplate DataType="{x:Type viewModels:CreateItemGeneratorConfigurationViewModel}">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name, Mode=OneWay}" TextTrimming="CharacterEllipsis" Margin="2" Foreground="{DynamicResource HighlightMidColour}" FontWeight="Bold" />
+                        <TextBlock Text="{Binding Description}" TextTrimming="CharacterEllipsis" Margin="2" FontStyle="Italic" Foreground="{DynamicResource ForegroundShallowColour}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.Resources>
+        </ComboBox>
 
         <Button x:Name="CreateItemButton" Grid.Column="1">
             <TextBlock Text="&#xE72A;" FontFamily="Segoe MDL2 Assets" />

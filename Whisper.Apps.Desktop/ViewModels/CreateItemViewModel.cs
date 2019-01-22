@@ -17,10 +17,10 @@ namespace Whisper.Apps.Desktop.ViewModels
         private readonly IClipboardService _clipboardService;
 
         private readonly IConfigurationAgent<FactoryMonitorConfiguration> _factoryMonitorConfigurationAgent;
+        private readonly IConfigurationAgent<GeneratorConfiguration> _generatorConfigurations;
+
         private FactoryMonitorConfiguration _factoryMonitorConfig;
-
-        private readonly List<CreateItemFactoryConfigurationViewModel> _availableFactoryConfigurations = new List<CreateItemFactoryConfigurationViewModel>();
-
+        
         public CreateItemViewModel(IConfigurationService configService, IGeneratorService generator, IClipboardService clipboardService)
         {
             _generator = generator;
@@ -28,27 +28,42 @@ namespace Whisper.Apps.Desktop.ViewModels
 
             _factoryMonitorConfigurationAgent = configService.GetConfigurationAgent<FactoryMonitorConfiguration>(CommonConfigurations.FactoryMonitorConfiguration, this);
             _factoryMonitorConfigurationAgent.Updated.Do(x => _factoryMonitorConfig = _factoryMonitorConfigurationAgent.Get()).Subscribe();
-
             _factoryMonitorConfig = _factoryMonitorConfigurationAgent.Get();
 
-            _availableFactoryConfigurations = _generator.FactoryInfo.Values.Select(x => new CreateItemFactoryConfigurationViewModel(x, _generator)).ToList();
-            AvailableFactoryConfigurations = _availableFactoryConfigurations;
-            SelectedFactoryConfiguration = AvailableFactoryConfigurations?.FirstOrDefault();
-
+            _generatorConfigurations = configService.GetConfigurationAgent<GeneratorConfiguration>(CommonConfigurations.GeneratorConfiguration, this);
+            _generatorConfigurations.Updated.ObserveOnDispatcher().Do(x => ConvertGeneratorConfigurations()).Subscribe();
+            ConvertGeneratorConfigurations();
+            
             CreateSelectedItemCommand = ReactiveCommand.Create(() =>
             {
-                var instance = SelectedFactoryConfiguration?.CreateInstance();
+                var instance = SelectedGeneratorConfiguration?.CreateInstance();
 
                 if (_factoryMonitorConfig.EnableAutoCopy)
                     instance?.SetToClipboard(_clipboardService);
             });
         }
 
-        [Reactive]
-        public IEnumerable<CreateItemFactoryConfigurationViewModel> AvailableFactoryConfigurations { get; set; }
+        private void ConvertGeneratorConfigurations()
+        {
+            var config = _generatorConfigurations.Get();
+
+            var configItems = config.Items.Where(x => _generator.GeneratorInfo.ContainsKey(x.GeneratorId)).Select(c =>
+            {
+                var g = _generator.GeneratorInfo[c.GeneratorId];
+                var configItem = g.DeserialiseConfiguration(c.ConfigurationStructure);
+
+                return new CreateItemGeneratorConfigurationViewModel(c.Id, g.Id, g.Name, c.Name, c.Description, configItem, _generator);
+            }).ToList();
+
+            AvailableFactoryConfigurations = configItems;
+            SelectedGeneratorConfiguration = configItems.FirstOrDefault();
+        }
 
         [Reactive]
-        public CreateItemFactoryConfigurationViewModel SelectedFactoryConfiguration { get; set; }
+        public IEnumerable<CreateItemGeneratorConfigurationViewModel> AvailableFactoryConfigurations { get; set; }
+
+        [Reactive]
+        public CreateItemGeneratorConfigurationViewModel SelectedGeneratorConfiguration { get; set; }
 
         public ICommand CreateSelectedItemCommand { get; }
     }

@@ -23,6 +23,14 @@ namespace Whisper.Apps.Desktop
 {
     public partial class App : Application
     {
+        public class BindingHookFixerer : IPropertyBindingHook
+        {
+            public bool ExecuteHook(object source, object target, Func<IObservedChange<object, object>[]> getCurrentViewModelProperties, Func<IObservedChange<object, object>[]> getCurrentViewProperties, BindingDirection direction)
+            {
+                return true;
+            }
+        }
+
         private readonly CompositeDisposable _applicationDisposables = new CompositeDisposable();
         //https://stackoverflow.com/questions/28785375/c-sharp-wpf-catch-keydown-even-when-minimized
         // https://www.dreamincode.net/forums/topic/180436-global-hotkeys/
@@ -63,6 +71,7 @@ namespace Whisper.Apps.Desktop
             Locator.CurrentMutable.Register(() => new SettingsPageApplicationView(), typeof(IViewFor<SettingsPageApplicationViewModel>));
             Locator.CurrentMutable.Register(() => new SettingsPageGeneralView(), typeof(IViewFor<SettingsPageGeneralViewModel>));
             Locator.CurrentMutable.Register(() => new SettingsPageGenerationView(), typeof(IViewFor<SettingsPageGenerationViewModel>));
+            Locator.CurrentMutable.Register(() => new SettingsPageGenerationItemView(), typeof(IViewFor<SettingsPageGenerationItemViewModel>));
 
             Func<SettingsWindow> settingsWindowFactory = () =>
             {
@@ -73,7 +82,7 @@ namespace Whisper.Apps.Desktop
                     new SettingsPageAboutViewModel(appInfoService),
                     new SettingsPageGeneralViewModel(configService),
                     //new SettingsPageApplicationViewModel(),
-                    //new SettingsPageGenerationViewModel()
+                    new SettingsPageGenerationViewModel(configService, generatorService)
                 });
 
                 settingsWindow.ViewModel = settingsVm;
@@ -84,6 +93,10 @@ namespace Whisper.Apps.Desktop
             var settingsManager = new SettingsWindowManager(settingsWindowFactory);
 
             var shellWindowViewModel = new ShellWindowViewModel(configService, new CreateItemViewModel(configService, generatorService, clipboardService), new HistoryListViewModel(generatorService, clipboardService), settingsManager);
+
+            // Fix this bat-shit nonsense.
+            Locator.CurrentMutable.UnregisterAll<IPropertyBindingHook>();
+            Locator.CurrentMutable.Register<IPropertyBindingHook>(() => new BindingHookFixerer());
 
             var shell = new ShellWindow
             {

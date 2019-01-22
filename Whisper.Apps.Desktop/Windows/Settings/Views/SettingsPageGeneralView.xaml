@@ -7,22 +7,13 @@
              xmlns:local="clr-namespace:Whisper.Apps.Desktop.Windows.Settings.Views"
              xmlns:reactiveUi="http://reactiveui.net"
              xmlns:viewModels="clr-namespace:Whisper.Apps.Desktop.Windows.Settings.ViewModels"
+             xmlns:wpf="clr-namespace:UniForm.Wpf;assembly=UniForm.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer>
         <StackPanel>
-            <StackPanel>
-                <TextBlock Text="Minimise to Tray" />
-                <CheckBox x:Name="MinimiseToTrayCheckBox" />
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Text="Always on Top" />
-                <CheckBox x:Name="AlwaysOnTopCheckBox" />
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Text="Auto-copy to Clipboard" />
-                <CheckBox x:Name="AutoCopyCheckBox" />
-            </StackPanel>
+            <wpf:UniFormControl x:Name="ShellConfigurationHost" />
+            <wpf:UniFormControl x:Name="FactoryMonitorConfigurationHost" />
         </StackPanel>
     </ScrollViewer>
 </reactiveUi:ReactiveUserControl>

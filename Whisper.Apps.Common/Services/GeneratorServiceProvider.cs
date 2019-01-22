@@ -11,18 +11,18 @@ namespace Whisper.Apps.Common.Services
     public class GeneratorServiceProvider : IGeneratorService
     {
         private readonly List<ContentBase> _content = new List<ContentBase>();
-        private readonly ConcurrentDictionary<Guid, IContentFactory> _contentFactories = new ConcurrentDictionary<Guid, IContentFactory>();
+        private readonly ConcurrentDictionary<Guid, IContentGenerator> _contentFactories = new ConcurrentDictionary<Guid, IContentGenerator>();
 
         private readonly Subject<Unit> _contentCleared = new Subject<Unit>();
         private readonly Subject<ContentBase> _contentCreated = new Subject<ContentBase>();
-        private readonly Subject<IContentFactoryMeta> _factoryAdded = new Subject<IContentFactoryMeta>();
+        private readonly Subject<IContentGeneratorMeta> _factoryAdded = new Subject<IContentGeneratorMeta>();
 
 
-        public IReadOnlyDictionary<Guid, IContentFactory> FactoryInfo => _contentFactories;
+        public IReadOnlyDictionary<Guid, IContentGenerator> GeneratorInfo => _contentFactories;
 
         public IReadOnlyList<ContentBase> Content => _content;
 
-        public IObservable<IContentFactoryMeta> FactoryAdded => _factoryAdded;
+        public IObservable<IContentGeneratorMeta> GeneratorAdded => _factoryAdded;
 
         public IObservable<Unit> ContentCleared => _contentCleared;
 
@@ -30,12 +30,12 @@ namespace Whisper.Apps.Common.Services
 
 
 
-        public void AddFactory(IContentFactory factory)
+        public void AddFactory(IContentGenerator generator)
         {
-            if (!_contentFactories.TryAdd(factory.Id, factory))
+            if (!_contentFactories.TryAdd(generator.Id, generator))
                 throw new Exception();
             
-            _factoryAdded.OnNext(factory);
+            _factoryAdded.OnNext(generator);
         }
 
         public ContentBase Create(Guid factoryId)
@@ -44,6 +44,20 @@ namespace Whisper.Apps.Common.Services
                 throw new Exception();
 
             var instance = factory.CreateInstance();
+
+            _content.Add(instance);
+
+            _contentCreated.OnNext(instance);
+
+            return instance;
+        }
+
+        public ContentBase Create(Guid factoryId, GeneratorConfigurationBase configuration)
+        {
+            if (!_contentFactories.TryGetValue(factoryId, out var factory))
+                throw new Exception();
+
+            var instance = factory.CreateInstance(configuration);
 
             _content.Add(instance);
 

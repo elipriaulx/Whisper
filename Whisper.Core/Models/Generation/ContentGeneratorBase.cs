@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace Whisper.Core.Models.Generation
 {
-    public abstract class ContentGeneratorBase : IContentFactory
+    public abstract class ContentGeneratorBase : IContentGenerator
     {
         public abstract Guid Id { get; }
         public abstract string Name { get; }
@@ -77,7 +77,7 @@ namespace Whisper.Core.Models.Generation
 
             var content = Create(configuration);
 
-            content.SetMeta(Id, configuration.Name);
+            content.SetMeta(Id, "Unspecified Source");
 
             return content;
         }

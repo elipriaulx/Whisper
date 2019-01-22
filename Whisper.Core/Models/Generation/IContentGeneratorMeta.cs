@@ -2,7 +2,7 @@
 
 namespace Whisper.Core.Models.Generation
 {
-    public interface IContentFactoryMeta
+    public interface IContentGeneratorMeta
     {
         Guid Id { get; }
 

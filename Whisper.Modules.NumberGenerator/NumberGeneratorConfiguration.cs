@@ -4,7 +4,7 @@ namespace Whisper.Modules.NumberGenerator
 {
     public sealed class NumberGeneratorConfiguration : GeneratorConfigurationBase
     {
-        public NumberGeneratorConfiguration() : base("Number")
+        public NumberGeneratorConfiguration()
         {
             // TODO
         }

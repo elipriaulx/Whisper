@@ -3,7 +3,7 @@ using System.Xml.Linq;
 
 namespace Whisper.Core.Models.Generation
 {
-    public interface IContentFactory : IContentFactoryMeta
+    public interface IContentGenerator : IContentGeneratorMeta
     {
         ContentBase CreateInstance();
         ContentBase CreateInstance(XElement generatorConfiguration);

@@ -53,5 +53,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="UniForm.Core">
+      <Version>0.1.0.1020</Version>
+    </PackageReference>
+    <PackageReference Include="UniForm.Engine">
+      <Version>0.1.0.1020</Version>
+    </PackageReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
