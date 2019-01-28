@@ -36,7 +36,7 @@ namespace Whisper.Apps.Desktop.ViewModels
 
         public ContentBase CreateInstance()
         {
-            return _generator.Create(GeneratorId, _configuration);
+            return _generator.Create(GeneratorId, _configuration, Name);
         }
     }
 }

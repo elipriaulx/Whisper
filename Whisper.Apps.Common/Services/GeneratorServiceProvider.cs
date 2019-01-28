@@ -38,12 +38,12 @@ namespace Whisper.Apps.Common.Services
             _factoryAdded.OnNext(generator);
         }
 
-        public ContentBase Create(Guid factoryId)
+        public ContentBase Create(Guid factoryId, string name = null)
         {
             if (!_contentFactories.TryGetValue(factoryId, out var factory))
                 throw new Exception();
 
-            var instance = factory.CreateInstance();
+            var instance = factory.CreateInstance(name);
 
             _content.Add(instance);
 
@@ -52,13 +52,13 @@ namespace Whisper.Apps.Common.Services
             return instance;
         }
 
-        public ContentBase Create(Guid factoryId, GeneratorConfigurationBase configuration)
+        public ContentBase Create(Guid factoryId, GeneratorConfigurationBase configuration, string name = null)
         {
             if (!_contentFactories.TryGetValue(factoryId, out var factory))
                 throw new Exception();
 
-            var instance = factory.CreateInstance(configuration);
-
+            var instance = factory.CreateInstance(configuration, name);
+            
             _content.Add(instance);
 
             _contentCreated.OnNext(instance);

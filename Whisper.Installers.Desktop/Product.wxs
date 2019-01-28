@@ -9,7 +9,7 @@
     UpgradeCode="c2bba211-821f-42c6-97cb-14ae773ab457">
 
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64"/>
-    <MajorUpgrade DowngradeErrorMessage="A newer version of Whisper is already installed." />
+    <MajorUpgrade AllowDowngrades="no" AllowSameVersionUpgrades="no" IgnoreRemoveFailure="no" Schedule="afterInstallInitialize" DowngradeErrorMessage="A newer version of Whisper is already installed." />
     <Media Id='1' Cabinet='WhisperDesktop.cab' EmbedCab='yes' />
     <UIRef Id="WixUI_InstallDir" />
     <Property Id="WIXUI_INSTALLDIR">INSTALLFOLDER</Property>

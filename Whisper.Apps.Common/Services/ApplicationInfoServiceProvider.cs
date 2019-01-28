@@ -91,6 +91,24 @@ namespace Whisper.Apps.Common.Services
                     LicenceUrl = "https://raw.githubusercontent.com/dotnet/corefx/master/LICENSE.TXT",
                     SourceUrl = "https://github.com/dotnet/corefx",
                 },
+                new ProductInfo
+                {
+                    ProductName = "UniForm.Core",
+                    LicenceUrl = "https://raw.githubusercontent.com/gpriaulx/UniForm/master/LICENSE",
+                    SourceUrl = "https://github.com/gpriaulx/UniForm",
+                },
+                new ProductInfo
+                {
+                    ProductName = "UniForm.Engine",
+                    LicenceUrl = "https://raw.githubusercontent.com/gpriaulx/UniForm/master/LICENSE",
+                    SourceUrl = "https://github.com/gpriaulx/UniForm",
+                },
+                new ProductInfo
+                {
+                    ProductName = "UniForm.Wpf",
+                    LicenceUrl = "https://raw.githubusercontent.com/gpriaulx/UniForm/master/LICENSE",
+                    SourceUrl = "https://github.com/gpriaulx/UniForm",
+                },
             };
         }
 

@@ -1,0 +1,24 @@
+version: 0.1.0.{build}
+skip_tags: true
+image: Visual Studio 2017
+configuration: Release
+platform: x64
+assembly_info:
+  patch: true
+  file: '**\SharedAssemblyInfo.cs'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+- ps: >-
+    ./Scripts/appveyor-prebuild.ps1
+
+    nuget restore
+build:
+  project: Whisper.sln
+  verbosity: normal
+after_build:
+- ps: ./Scripts/appveyor-postbuild.ps1
+artifacts:
+- path: Whisper.Installers.Desktop\bin\Release\*.msi
+  name: Whisper Installer

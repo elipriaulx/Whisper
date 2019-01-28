@@ -83,10 +83,10 @@
     <Compile Include="Controls\LustdWindowTitleBarToggleButton.cs" />
     <Compile Include="Models\Configurations\ApplicationConfigurations.cs" />
     <Compile Include="TrayAgent\WhisperTrayAgent.cs" />
-    <Compile Include="ViewModels\CreateItemGeneratorConfigurationViewModel.cs" />
-    <Compile Include="ViewModels\CreateItemViewModel.cs" />
-    <Compile Include="ViewModels\HistoryListItemViewModel.cs" />
-    <Compile Include="ViewModels\HistoryListViewModel.cs" />
+    <Compile Include="Windows\Shell\ViewModels\CreateItemGeneratorConfigurationViewModel.cs" />
+    <Compile Include="Windows\Shell\ViewModels\CreateItemViewModel.cs" />
+    <Compile Include="Windows\Shell\ViewModels\HistoryListItemViewModel.cs" />
+    <Compile Include="Windows\Shell\ViewModels\HistoryListViewModel.cs" />
     <Compile Include="Windows\Settings\ComponentViewModels\ProductViewModel.cs" />
     <Compile Include="Windows\Settings\SettingsWindowManager.cs" />
     <Compile Include="Windows\Settings\SettingsWindowViewModel.cs" />
@@ -113,21 +113,21 @@
       <DependentUpon>SettingsPageGenerationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Configurations\ShellConfiguration.cs" />
-    <Compile Include="Windows\Shell\ShellWindowViewModel.cs" />
+    <Compile Include="Windows\Shell\ViewModels\ShellWindowViewModel.cs" />
     <Compile Include="Windows\Splash\SplashWindowViewModel.cs" />
-    <Compile Include="Views\CreateItemView.xaml.cs">
+    <Compile Include="Windows\Shell\Views\CreateItemView.xaml.cs">
       <DependentUpon>CreateItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HistoryListItemView.xaml.cs">
+    <Compile Include="Windows\Shell\Views\HistoryListItemView.xaml.cs">
       <DependentUpon>HistoryListItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\HistoryListView.xaml.cs">
+    <Compile Include="Windows\Shell\Views\HistoryListView.xaml.cs">
       <DependentUpon>HistoryListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Settings\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\Shell\ShellWindow.xaml.cs">
+    <Compile Include="Windows\Shell\Views\ShellWindow.xaml.cs">
       <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\Splash\SplashWindow.xaml.cs">
@@ -149,15 +149,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\CreateItemView.xaml">
+    <Page Include="Windows\Shell\Views\CreateItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\HistoryListItemView.xaml">
+    <Page Include="Windows\Shell\Views\HistoryListItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\HistoryListView.xaml">
+    <Page Include="Windows\Shell\Views\HistoryListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -184,7 +184,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\Shell\ShellWindow.xaml">
+    <Page Include="Windows\Shell\Views\ShellWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

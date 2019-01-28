@@ -5,9 +5,9 @@ namespace Whisper.Core.Models.Generation
 {
     public interface IContentGenerator : IContentGeneratorMeta
     {
-        ContentBase CreateInstance();
-        ContentBase CreateInstance(XElement generatorConfiguration);
-        ContentBase CreateInstance(GeneratorConfigurationBase generatorConfiguration);
+        ContentBase CreateInstance(string name = null);
+        ContentBase CreateInstance(XElement generatorConfiguration, string name = null);
+        ContentBase CreateInstance(GeneratorConfigurationBase generatorConfiguration, string name = null);
 
         GeneratorConfigurationBase CreateConfiguration();
 

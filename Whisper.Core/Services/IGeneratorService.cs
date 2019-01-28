@@ -14,9 +14,9 @@ namespace Whisper.Core.Services
 
         IObservable<ContentBase> ContentCreated { get; }
         
-        ContentBase Create(Guid factoryId);
+        ContentBase Create(Guid factoryId, string name = null);
 
-        ContentBase Create(Guid factoryId, GeneratorConfigurationBase configuration);
+        ContentBase Create(Guid factoryId, GeneratorConfigurationBase configuration, string name = null);
 
         void ClearHistory();
     }

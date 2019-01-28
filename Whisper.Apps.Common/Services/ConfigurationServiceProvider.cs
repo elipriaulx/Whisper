@@ -182,7 +182,9 @@ namespace Whisper.Apps.Common.Services
                     throw new Exception("Unable to load configuration from the specified path.", ex);
                 }
             else
+            {
                 _logger?.Warning("An attempt was made to load configuration that doesn't exist.");
+            }
         }
 
         public void SaveConfiguration(string fileName)

@@ -9,17 +9,23 @@ namespace Whisper.Core.Models.Generation
             ContentId = Guid.NewGuid();
         }
 
-        internal void SetMeta(Guid factoryId, string contentName)
+        internal void SetSource(Guid generatorId, string generatorName)
         {
-            FactoryId = factoryId;
+            GeneratorId = generatorId;
+            Name = generatorName;
+        }
+        
+
+        internal void SetName(string contentName)
+        {
             Name = contentName;
         }
         
         public Guid ContentId { get; }
 
-        public Guid FactoryId { get; private set; }
+        public Guid GeneratorId { get; private set; }
 
-        public string Name { get; private set; }
+        public string Name { get; private set; } = "Unnamed";
 
         public abstract string PublicPreviewText { get; }
 

@@ -12,9 +12,9 @@ namespace Whisper.Core.Models.Generation
         public abstract string Name { get; }
         public abstract string Description { get; }
 
-        public abstract ContentBase CreateInstance();
-        public abstract ContentBase CreateInstance(XElement configuration);
-        public abstract ContentBase CreateInstance(GeneratorConfigurationBase generatorConfiguration);
+        public abstract ContentBase CreateInstance(string name = null);
+        public abstract ContentBase CreateInstance(XElement configuration, string name = null);
+        public abstract ContentBase CreateInstance(GeneratorConfigurationBase generatorConfiguration, string name = null);
 
         public abstract GeneratorConfigurationBase CreateConfiguration();
 
@@ -24,23 +24,23 @@ namespace Whisper.Core.Models.Generation
 
     public abstract class ContentGeneratorBase<TContent, TConfiguration> : ContentGeneratorBase where TContent : ContentBase where TConfiguration : GeneratorConfigurationBase, new()
     {
-        public override ContentBase CreateInstance()
+        public override ContentBase CreateInstance(string name = null)
         {
-            return TaggedCreate();
+            return TaggedCreate(name: name);
         }
 
-        public override ContentBase CreateInstance(XElement configuration)
+        public override ContentBase CreateInstance(XElement configuration, string name = null)
         {
             var configInstance = DoDeserialiseConfiguration(configuration);
 
-            return TaggedCreate(configInstance);
+            return TaggedCreate(configInstance, name);
         }
 
-        public override ContentBase CreateInstance(GeneratorConfigurationBase generatorConfiguration)
+        public override ContentBase CreateInstance(GeneratorConfigurationBase generatorConfiguration, string name = null)
         {
             var configInstance = ToTypedConfiguration(generatorConfiguration);
 
-            return TaggedCreate(configInstance);
+            return TaggedCreate(configInstance, name);
         }
 
         public override GeneratorConfigurationBase CreateConfiguration()
@@ -70,14 +70,17 @@ namespace Whisper.Core.Models.Generation
             return DoDeserialiseConfiguration(generatorConfiguration);
         }
 
-        private TContent TaggedCreate(TConfiguration configuration = null)
+        private TContent TaggedCreate(TConfiguration configuration = null, string name = null)
         {
             if (configuration == null)
                 configuration = DoCreateConfiguration();
 
             var content = Create(configuration);
 
-            content.SetMeta(Id, "Unspecified Source");
+            content.SetSource(Id, Name);
+
+            if (name != null)
+                content.SetName(name);
 
             return content;
         }
