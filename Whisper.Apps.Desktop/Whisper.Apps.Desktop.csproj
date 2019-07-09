@@ -254,21 +254,21 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fody">
-      <Version>3.3.5</Version>
+      <Version>5.1.1</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Lustd">
-      <Version>1.2.0</Version>
+      <Version>1.2.1</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI">
-      <Version>9.8.15</Version>
+      <Version>9.19.3</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI.Fody">
-      <Version>9.8.15</Version>
+      <Version>9.19.2</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI.WPF">
-      <Version>9.8.15</Version>
+      <Version>9.19.3</Version>
     </PackageReference>
     <PackageReference Include="System.Drawing.Common">
       <Version>4.5.1</Version>
