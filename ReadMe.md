@@ -1,11 +1,11 @@
-[![Release](https://img.shields.io/github/release-pre/elipriaulx/Whisper.svg)](/releases/latest) [![Build status](https://ci.appveyor.com/api/projects/status/beht45xl4h9lqc2g/branch/master?svg=true)](https://ci.appveyor.com/project/elipriaulx/whisper/branch/master)
+[![Release](http://img.shields.io/github/v/release/elipriaulx/Whisper.svg?include_prereleases)](https://github.com/elipriaulx/Whisper/releases) [![Build status](https://ci.appveyor.com/api/projects/status/beht45xl4h9lqc2g/branch/master?svg=true)](https://ci.appveyor.com/project/elipriaulx/whisper/branch/master)
 
 Whisper
 =======
 
 ![Whisper Logo](Assets/WhisperBackground-Branding.png)
 
-Whisper is a provider-driven 'clipboard content generator' for Windows. It runs in the background and provides content directly to your clipboard. New Passwords, Guids, and Random Numbers are bundled with the core application, but this could be extended to anything - Number Plates, Harry Potter Quotes, or Pokemon Names for example.
+Whisper is a provider-driven 'clipboard content generator' for Windows. It runs in the background and provides content directly to your clipboard. New Passwords, Guids, and Random Numbers are bundled with the core application, but this could be extended to anything - Number Plates, ~~Harry Potter Quotes,~~ or Pokemon Names for example.
 
 ![Whisper Shell](ReadMe.Assets/Shell01.png)
 
