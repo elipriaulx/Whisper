@@ -1,22 +1,24 @@
-﻿<Window x:Class="Whisper.Apps.Desktop.Windows.Splash.SplashWindow"
+﻿<controls:LustdWindowEnhanced x:Class="Whisper.Apps.Desktop.Windows.Splash.SplashWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Whisper.Apps.Desktop.Views"
         xmlns:assets="clr-namespace:Whisper.Apps.Desktop.Assets"
+        xmlns:controls="clr-namespace:Lustd.Controls;assembly=Lustd"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Title="Whisper" Height="280" Width="480">
-    <Grid Background="{DynamicResource HighlightMidColour}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <assets:WhisperLogoFg Grid.Row="0" Margin="30" Foreground="{DynamicResource ForegroundShallowColour}" />
+        <assets:WhisperLogoFg Grid.Row="0" Margin="30" Foreground="{DynamicResource HighlightMidColour}" />
 
-        <TextBlock Grid.Row="1" Margin="10" Foreground="{DynamicResource ForegroundShallowColour}" HorizontalAlignment="Right" Text="Loading Components..." />
+        <TextBlock Grid.Row="1" Margin="10" Foreground="{DynamicResource ForegroundShallowColour}" HorizontalAlignment="Right" Text="{Binding ProgressText}" />
 
     </Grid>
-</Window>
+</controls:LustdWindowEnhanced>

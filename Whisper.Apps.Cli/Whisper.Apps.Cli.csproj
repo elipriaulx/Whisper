@@ -54,12 +54,37 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="System.Reactive">
+      <Version>4.4.1</Version>
+    </PackageReference>
     <PackageReference Include="UniForm.Core">
       <Version>0.1.0.1020</Version>
     </PackageReference>
     <PackageReference Include="UniForm.Engine">
       <Version>0.1.0.1020</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Whisper.Apps.Common\Whisper.Apps.Common.csproj">
+      <Project>{6AD0EEF8-4F19-48CC-8AD4-60D316BEB061}</Project>
+      <Name>Whisper.Apps.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whisper.Core\Whisper.Core.csproj">
+      <Project>{2D1B6C36-8B97-4E0B-A356-306E80C81FD1}</Project>
+      <Name>Whisper.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whisper.Modules.GuidGenerator\Whisper.Modules.GuidGenerator.csproj">
+      <Project>{fd2e5bd3-f9e1-4668-9878-5661e41b5c3f}</Project>
+      <Name>Whisper.Modules.GuidGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whisper.Modules.NumberGenerator\Whisper.Modules.NumberGenerator.csproj">
+      <Project>{7d4f2f4c-72a4-45ab-98f1-822d848209aa}</Project>
+      <Name>Whisper.Modules.NumberGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whisper.Modules.PasswordGenerator\Whisper.Modules.PasswordGenerator.csproj">
+      <Project>{7b5a774d-6619-4045-b28e-9fcd011351b7}</Project>
+      <Name>Whisper.Modules.PasswordGenerator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

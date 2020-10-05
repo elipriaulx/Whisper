@@ -1,26 +1,38 @@
-﻿<controls:LustdWindow x:Class="Whisper.Apps.Desktop.Windows.Shell.ShellWindow"
+﻿<controls:LustdWindowEnhanced x:Class="Whisper.Apps.Desktop.Windows.Shell.ShellWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:controls="clr-namespace:Whisper.Apps.Desktop.Controls"
         xmlns:assets="clr-namespace:Whisper.Apps.Desktop.Assets"
         xmlns:reactiveUi="http://reactiveui.net"
-        mc:Ignorable="d" AllowTopmost="True"
-                      MinWidth="340" MinHeight="360"
+        xmlns:controls="clr-namespace:Lustd.Controls;assembly=Lustd"
+        xmlns:shell="clr-namespace:Whisper.Apps.Desktop.Windows.Shell"
+        mc:Ignorable="d"
+        MinWidth="340" MinHeight="360"
         Title="Whisper" Height="500" Width="360">
-    
-    <controls:LustdWindow.TitleContent>
-        <assets:WindowTitle />
-    </controls:LustdWindow.TitleContent>
 
-    <controls:LustdWindow.ActionContent>
-        <controls:LustdWindowTitleBarButtonPanel>
-            <controls:LustdWindowTitleBarButton x:Name="SettingsButton" ToolTip="Settings">
-                <TextBlock Text="&#xE713;" />
-            </controls:LustdWindowTitleBarButton>
-        </controls:LustdWindowTitleBarButtonPanel>
-    </controls:LustdWindow.ActionContent>
+    <controls:LustdWindowEnhanced.TitleContent>
+        <assets:WindowTitle />
+    </controls:LustdWindowEnhanced.TitleContent>
+
+    <controls:LustdWindowEnhanced.CommandContent>
+        <StackPanel Margin="10,0" Orientation="Horizontal">
+            <Button x:Name="MinimiseToTrayWindowButton" ToolTip="Minimise To Tray" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type shell:ShellWindow}}, Path= MinimiseToTrayCommand}">
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="10" Text="&#xE741;" />
+            </Button>
+            <ToggleButton x:Name="AlwaysOnTopButton" ToolTip="Always On Top" IsChecked="{Binding RelativeSource={RelativeSource AncestorType={x:Type shell:ShellWindow}}, Path=Topmost, Mode=TwoWay}">
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="10" Text="&#xE898;" />
+            </ToggleButton>
+        </StackPanel>
+    </controls:LustdWindowEnhanced.CommandContent>
+
+    <controls:LustdWindowEnhanced.ActionContent>
+        <StackPanel Margin="0,0" Orientation="Horizontal">
+            <Button x:Name="SettingsButton" ToolTip="Settings">
+                <TextBlock FontFamily="Segoe MDL2 Assets" FontSize="10" Text="&#xE713;" />
+            </Button>
+        </StackPanel>
+    </controls:LustdWindowEnhanced.ActionContent>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -37,4 +49,4 @@
         </Border>
     </Grid>
 
-</controls:LustdWindow>
+</controls:LustdWindowEnhanced>

@@ -3,11 +3,10 @@
     public enum InitialisationStages
     {
         Undefined,
-        Discovering,
-        Services,
-        Configuration,
-        Modules,
-        Prepare,
-        Finalise
+        DiscoveringModules,
+        StartingServices,
+        LoadingConfiguration,
+        PreparingModules,
+        Finalising
     }
 }

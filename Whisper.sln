@@ -22,6 +22,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installers", "Installers", "{83B2C6B1-6476-456E-95CC-A31E5346C8EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whisper.Apps.Cli", "Whisper.Apps.Cli\Whisper.Apps.Cli.csproj", "{A12CCE6C-75BC-49B6-9508-D1A39236399D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7D4F2F4C-72A4-45AB-98F1-822D848209AA} = {7D4F2F4C-72A4-45AB-98F1-822D848209AA}
+		{7B5A774D-6619-4045-B28E-9FCD011351B7} = {7B5A774D-6619-4045-B28E-9FCD011351B7}
+		{FD2E5BD3-F9E1-4668-9878-5661E41B5C3F} = {FD2E5BD3-F9E1-4668-9878-5661E41B5C3F}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whisper.Apps.Common", "Whisper.Apps.Common\Whisper.Apps.Common.csproj", "{6AD0EEF8-4F19-48CC-8AD4-60D316BEB061}"
 EndProject
@@ -33,7 +38,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Other", "Other", "{08E8DC6B-0CEC-49D2-8205-886D3D188692}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		Scripts\appveyor-postbuild.ps1 = Scripts\appveyor-postbuild.ps1
+		Scripts\appveyor-prebuild.ps1 = Scripts\appveyor-prebuild.ps1
+		appveyor.yml = appveyor.yml
 		LICENSE = LICENSE
+		Scripts\MakeIcon.bat = Scripts\MakeIcon.bat
 		ReadMe.md = ReadMe.md
 		SharedAssemblyInfo.cs = SharedAssemblyInfo.cs
 	EndProjectSection

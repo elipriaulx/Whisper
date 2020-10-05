@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using Whisper.Apps.Desktop.Controls;
 using Whisper.Apps.Desktop.Windows.Settings;
+using Whisper.Apps.Desktop.Windows.Shell;
 
 namespace Whisper.Apps.Desktop.TrayAgent
 {
     public class WhisperTrayAgent : IDisposable
     {
-        private readonly LustdWindow _shellWindow;
+        private readonly ShellWindow _shellWindow;
         private readonly SettingsWindowManager _settingsManager;
         private readonly NotifyIcon _noticon;
 
-        public WhisperTrayAgent(LustdWindow shellWindow, SettingsWindowManager settingsManager)
+        public WhisperTrayAgent(ShellWindow shellWindow, SettingsWindowManager settingsManager)
         {
             _shellWindow = shellWindow;
             _settingsManager = settingsManager;
@@ -30,6 +30,8 @@ namespace Whisper.Apps.Desktop.TrayAgent
             _noticon.ContextMenu = new ContextMenu(new[]
             {
                 new MenuItem("Restore", (sender, e) => { RestoreApplication(); }),
+                new MenuItem("-"),
+                //new MenuItem("Generators", ),
                 new MenuItem("-"),
                 new MenuItem("Settings", (sender, e) => { ShowSettings(); }),
                 new MenuItem("Exit", (sender, e) => { CloseApplication(); })

@@ -12,7 +12,7 @@ using Whisper.Core.Services;
 
 namespace Whisper.Apps.Common.Services
 {
-    public class ConfigurationServiceProvider : IConfigurationService
+    public class ConfigurationServiceProvider : IConfigurationService, IApplicationService
     {
         private readonly CompositeDisposable _agentUpdateSubscriptions = new CompositeDisposable();
         private readonly Dictionary<Guid, CommonConfigurationAgent> _configDictionary = new Dictionary<Guid, CommonConfigurationAgent>();
@@ -263,6 +263,21 @@ namespace Whisper.Apps.Common.Services
         {
             // A configuration agent has updated!
             _updated.OnNext(info);
+        }
+
+        public void Dispose()
+        {
+            
+        }
+
+        public void Start()
+        {
+
+        }
+
+        public void Stop()
+        {
+
         }
     }
 }

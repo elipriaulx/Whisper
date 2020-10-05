@@ -2,9 +2,9 @@ using System.Reflection;
 
 [assembly: AssemblyDescription("Whisper - Clipboard Content Generator")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("gpriaulx.co")]
+[assembly: AssemblyCompany("eliette.priaulx.co")]
 [assembly: AssemblyProduct("Whisper")]
-[assembly: AssemblyCopyright("Copyright �  2018")]
+[assembly: AssemblyCopyright("Copyright \u00a9 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

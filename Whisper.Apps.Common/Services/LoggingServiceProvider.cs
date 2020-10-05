@@ -10,7 +10,7 @@ namespace Whisper.Apps.Common.Services
 {
     public class LoggingServiceProvider : ILoggingService
     {
-        private readonly Dictionary<string, ILogger> loggers = new Dictionary<string, ILogger>();
+        private readonly Dictionary<string, ILogger> _loggers = new Dictionary<string, ILogger>();
 
         public LoggingServiceProvider(string loggingDirectory, string defaultLoggerName = "application")
         {

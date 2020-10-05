@@ -4,21 +4,26 @@ using Whisper.Core.Services;
 
 namespace Whisper.Apps.Common.Services
 {
-    public class ClipboardServiceProvider : IClipboardService
+    public class ClipboardServiceProvider : IClipboardService, IApplicationService
     {
         public void SetClipboardText(string text)
         {
             Clipboard.SetText(text);
         }
 
-        public void SetClipboardImage(Bitmap imageData)
+        public void Dispose()
         {
-            Clipboard.SetImage(imageData);
+            
         }
 
-        public void SetClipboardAudio(byte[] audioData)
+        public void Start()
         {
-            Clipboard.SetAudio(audioData);
+
+        }
+
+        public void Stop()
+        {
+
         }
     }
 }

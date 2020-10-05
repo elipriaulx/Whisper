@@ -13,8 +13,8 @@ namespace Whisper.Apps.Desktop.Windows.Shell
 {
     public class ShellWindowViewModel : ReactiveObject, IDisposable
     {
-        private readonly IDisposable subscriptions;
-        private readonly IConfigurationAgent<ShellConfiguration> configurationAgent;
+        private readonly IDisposable _subscriptions;
+        private readonly IConfigurationAgent<ShellConfiguration> _configurationAgent;
         private readonly SettingsWindowManager _settingsManager;
 
         private bool _refreshingConfig;
@@ -22,9 +22,9 @@ namespace Whisper.Apps.Desktop.Windows.Shell
         public ShellWindowViewModel(IConfigurationService configurationService, CreateItemViewModel creator, HistoryListViewModel historyList, SettingsWindowManager settingsManager)
         {
             _settingsManager = settingsManager;
-            configurationAgent = configurationService.GetConfigurationAgent<ShellConfiguration>(ApplicationConfigurations.ShellConfiguration, this);
+            _configurationAgent = configurationService.GetConfigurationAgent<ShellConfiguration>(ApplicationConfigurations.ShellConfiguration, this);
 
-            subscriptions = configurationAgent.Updated.ObserveOnDispatcher().Do(x => { RefreshConfig(); }).Subscribe();
+            _subscriptions = _configurationAgent.Updated.ObserveOnDispatcher().Do(x => { RefreshConfig(); }).Subscribe();
 
             Creator = creator;
             HistoryList = historyList;
@@ -50,7 +50,7 @@ namespace Whisper.Apps.Desktop.Windows.Shell
         
         public void Dispose()
         {
-            subscriptions?.Dispose();
+            _subscriptions?.Dispose();
         }
 
         private void RefreshConfig()
@@ -62,7 +62,7 @@ namespace Whisper.Apps.Desktop.Windows.Shell
             {
                 _refreshingConfig = true;
 
-                var configuration = configurationAgent.Get();
+                var configuration = _configurationAgent.Get();
 
                 AlwaysOnTop = configuration.EnableAlwaysOnTop;
                 AllowMinimiseToTray = configuration.EnableMinimiseToTray;
@@ -78,12 +78,12 @@ namespace Whisper.Apps.Desktop.Windows.Shell
             if (_refreshingConfig)
                 return;
 
-            var configuration = configurationAgent.Get();
+            var configuration = _configurationAgent.Get();
 
             configuration.EnableAlwaysOnTop = AlwaysOnTop;
             configuration.EnableMinimiseToTray = AllowMinimiseToTray;
 
-            configurationAgent.Update(configuration);
+            _configurationAgent.Update(configuration);
         }
     }
 }

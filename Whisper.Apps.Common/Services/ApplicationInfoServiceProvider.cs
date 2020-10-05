@@ -6,11 +6,48 @@ using Whisper.Core.Services;
 
 namespace Whisper.Apps.Common.Services
 {
-    public class ApplicationInfoServiceProvider : IApplicationInfoService
+    public class ApplicationInfoServiceProvider : IApplicationInfoService, IApplicationService
     {
         private FileVersionInfo _versionInfo;
 
         public ApplicationInfoServiceProvider()
+        {
+           
+        }
+
+        public string ProductName => _versionInfo.ProductName;
+
+        public string CopyrightNote => _versionInfo.LegalCopyright;
+
+        public string ProductVersion => _versionInfo.ProductVersion;
+
+        
+        public string LicenceUrl => "https://raw.githubusercontent.com/gpriaulx/Whisper/master/LICENSE";
+
+        public string ProjectUrl => null;
+
+        public string SourceUrl => "https://github.com/gpriaulx/Whisper";
+
+
+        public IEnumerable<IProductInfo> DependencyInformation { get; private set; }
+
+
+        public class ProductInfo : IProductInfo
+        {
+            public string ProductName { get; set; }
+            public string CopyrightNote { get; set; }
+            public string ProductVersion { get; set; }
+            public string LicenceUrl { get; set; }
+            public string ProjectUrl { get; set; }
+            public string SourceUrl { get; set; }
+        }
+
+        public void Dispose()
+        {
+            
+        }
+
+        public void Start()
         {
             _versionInfo = FileVersionInfo.GetVersionInfo(Assembly.GetEntryAssembly().Location);
 
@@ -112,31 +149,9 @@ namespace Whisper.Apps.Common.Services
             };
         }
 
-        public string ProductName => _versionInfo.ProductName;
-
-        public string CopyrightNote => _versionInfo.LegalCopyright;
-
-        public string ProductVersion => _versionInfo.ProductVersion;
-
-        
-        public string LicenceUrl => "https://raw.githubusercontent.com/gpriaulx/Whisper/master/LICENSE";
-
-        public string ProjectUrl => null;
-
-        public string SourceUrl => "https://github.com/gpriaulx/Whisper";
-
-
-        public IEnumerable<IProductInfo> DependencyInformation { get; }
-
-
-        public class ProductInfo : IProductInfo
+        public void Stop()
         {
-            public string ProductName { get; set; }
-            public string CopyrightNote { get; set; }
-            public string ProductVersion { get; set; }
-            public string LicenceUrl { get; set; }
-            public string ProjectUrl { get; set; }
-            public string SourceUrl { get; set; }
+
         }
     }
 }

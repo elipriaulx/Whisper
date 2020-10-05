@@ -5,7 +5,7 @@
     Language="1033"
     Name="Whisper"
     Version="!(bind.FileVersion.Whisper.exe)"
-    Manufacturer="gpriaulx.co"
+    Manufacturer="eliette.priaulx.co"
     UpgradeCode="c2bba211-821f-42c6-97cb-14ae773ab457">
 
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64"/>

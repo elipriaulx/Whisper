@@ -8,7 +8,7 @@ using Whisper.Core.Services;
 
 namespace Whisper.Apps.Common.Services
 {
-    public class GeneratorServiceProvider : IGeneratorService
+    public class GeneratorServiceProvider : IGeneratorService, IApplicationService
     {
         private readonly List<ContentBase> _content = new List<ContentBase>();
         private readonly ConcurrentDictionary<Guid, IContentGenerator> _contentFactories = new ConcurrentDictionary<Guid, IContentGenerator>();
@@ -71,6 +71,21 @@ namespace Whisper.Apps.Common.Services
             _content.Clear();
 
             _contentCleared.OnNext(new Unit());
+        }
+
+        public void Dispose()
+        {
+            
+        }
+
+        public void Start()
+        {
+
+        }
+
+        public void Stop()
+        {
+
         }
     }
 }

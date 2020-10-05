@@ -2,13 +2,13 @@
 {
     public class InitialisationUpdate
     {
-        public InitialisationUpdate(InitialisationStages stage, double progress = 0)
+        public InitialisationUpdate(InitialisationStages stage, string message)
         {
             Stage = stage;
-            ProgressPercentage = progress;
+            Message = message;
         }
 
-        public double ProgressPercentage { get; }
         public InitialisationStages Stage { get; }
+        public string Message { get; }
     }
 }
