@@ -8,7 +8,7 @@
         xmlns:controls="clr-namespace:Lustd.Controls;assembly=Lustd"
         xmlns:shell="clr-namespace:Whisper.Apps.Desktop.Windows.Shell"
         mc:Ignorable="d"
-        MinWidth="340" MinHeight="360"
+        MinWidth="360" MinHeight="360"
         Title="Whisper" Height="500" Width="360">
 
     <controls:LustdWindowEnhanced.TitleContent>
